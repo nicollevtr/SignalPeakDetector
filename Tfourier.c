@@ -2,19 +2,18 @@
 #include <math.h>
 #include <stdio.h>
 
-// Function to calculate the DFT
-void calculateDFT(int len)
+int main()
 {
+    int len;
+    printf("Numero de elementos:\n");
+    scanf("%d", &len);
     float xr[len];
     float xi[len];
     float Xr[len];
     float Xi[len];
     int i, k, n, N = len;
-  //  printf("Enter the number of "
-     //      "points in the DFT: ");
-    //scanf("%d", &N);
     FILE *fptreal;
-    if ((fptreal = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\codigos\\samples.txt","r")) == NULL)
+    if ((fptreal = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\samples.txt","r")) == NULL)
     {
         printf("Error! opening file");
     }
@@ -24,7 +23,7 @@ void calculateDFT(int len)
     }
     fclose(fptreal);
     FILE *fptim;
-    if ((fptim = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\codigos\\samplesIM.txt","r")) == NULL)
+    if ((fptim = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\samplesIM.txt","r")) == NULL)
     {
         printf("Error! opening file");
     }
@@ -32,18 +31,6 @@ void calculateDFT(int len)
     {
         fscanf(fptim, "%f", &xi[i] ); //constroi o vetor com a parte imaginara
     }
-//    for (i = 0; i < len; i++)
-//    {
-//        printf("%f", xr[i] ); //PRINTA o vetor com a parte imaginara
-//    }
-//    for (i = 0; i < len; i++)
-//  {
-//        printf("%f", xi[i] ); //PRINTA o vetor com a parte imaginara
-//  }
-//  printf("Number of elements: %d\n", sizeof(xr)/sizeof(xr[0]));
-//  printf("last element: %f\n", xr[len-1]);
-//  printf("number of elements: %d\n", sizeof(xi)/sizeof(xi[0]));
-//  printf("last element: %f\n", xi[len-1]);
     fclose(fptim);
     for (k = 0; k < N; k++)
     {
@@ -63,13 +50,36 @@ void calculateDFT(int len)
         printf("(%f) + j(%f)\n\n",
                Xr[k], Xi[k]);
     }
-}
+    FILE *fptr;
 
-int main()
-{
-    int tam;
-    printf("Numero de elementos:\n");
-    scanf("%d", &tam);
-    calculateDFT(tam);
+    fptr = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\transformadaReal.txt","w");
+
+    if(fptr == NULL)
+    {
+        printf("Error!");
+        //exit(1);
+    }
+
+    for (i = 0; i < len; i++)
+    {
+        fprintf(fptr, "%f\n", Xr[i] ); //salva o vetor com a parte real da transformada
+    }
+    fclose(fptr);
+
+    FILE *fptrIM;
+
+    fptrIM = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\transformadaIM.txt","w");
+
+    if(fptrIM == NULL)
+    {
+        printf("Error!");
+        //exit(1);
+    }
+
+    for (i = 0; i < len; i++)
+    {
+        fprintf(fptrIM, "%f\n", Xi[i] ); //salva o vetor com a parte imaginaria da transformada
+    }
+    fclose(fptrIM);
     return 0;
 }
