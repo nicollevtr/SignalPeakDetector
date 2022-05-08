@@ -96,9 +96,8 @@ int main()
     {
         Xr2[i] = Xr[i]*Xr[i];
         Xi2[i] = Xi[i]*Xi[i];
-        magX[i] = Xr[i]*Xi[i];
+        magX[i] = sqrt(Xr2[i]*Xi2[i]);
     }
-
 
     FILE *fptrmag;
 
@@ -112,7 +111,7 @@ int main()
 
     for (i = 0; i < len; i++)
     {
-        fprintf(fptrmag, "%f\n", Xi[i] ); //salva o vetor com a parte imaginaria da transformada
+        fprintf(fptrmag, "%f\n", magX[i] ); //salva o vetor com a parte imaginaria da transformada
     }
     fclose(fptrmag);
     printf("mag salva!\n");
