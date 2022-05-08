@@ -47,8 +47,8 @@ int main()
                    - xr[n] * sin(2 * 3.141592 * k * n / N)
                    + xi[n] * cos(2 * 3.141592 * k * n / N));
         }
-        printf("(%f) + j(%f)\n\n",
-               Xr[k], Xi[k]);
+       // printf("(%f) + j(%f)\n\n",
+         //      Xr[k], Xi[k]);
     }
     FILE *fptr;
 
@@ -81,5 +81,40 @@ int main()
         fprintf(fptrIM, "%f\n", Xi[i] ); //salva o vetor com a parte imaginaria da transformada
     }
     fclose(fptrIM);
+    printf("transformada salva!\n");
+
+    //calcular os valores absolutos
+
+
+
+
+    float Xr2[len];
+    float Xi2[len];
+    float magX[len];
+
+    for (i = 0; i < len; i++)
+    {
+        Xr2[i] = Xr[i]*Xr[i];
+        Xi2[i] = Xi[i]*Xi[i];
+        magX[i] = Xr[i]*Xi[i];
+    }
+
+
+    FILE *fptrmag;
+
+    fptrmag = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\magnitude.txt","w");
+
+    if(fptrmag == NULL)
+    {
+        printf("Error!");
+        //exit(1);
+    }
+
+    for (i = 0; i < len; i++)
+    {
+        fprintf(fptrmag, "%f\n", Xi[i] ); //salva o vetor com a parte imaginaria da transformada
+    }
+    fclose(fptrmag);
+    printf("mag salva!\n");
     return 0;
 }
