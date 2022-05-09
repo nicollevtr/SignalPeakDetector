@@ -12,25 +12,25 @@ int main()
     float Xi[len];
     int i, k, n, N = len;
     FILE *fptreal;
-    if ((fptreal = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\samples.txt","r")) == NULL)
+    if ((fptreal = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\codigos\\ps04_samples.txt","r")) == NULL)
     {
         printf("Error! opening file");
     }
     for (i = 0; i < len; i++)
     {
-        fscanf(fptreal, "%f", &xr[i] ); //constroi o vetor com a parte real
+        fscanf(fptreal, "%f    %f", &xr[i],&xi[i] ); //constroi o vetor com a parte real
     }
     fclose(fptreal);
-    FILE *fptim;
-    if ((fptim = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\samplesIM.txt","r")) == NULL)
-    {
-        printf("Error! opening file");
-    }
-    for (i = 0; i < len; i++)
-    {
-        fscanf(fptim, "%f", &xi[i] ); //constroi o vetor com a parte imaginara
-    }
-    fclose(fptim);
+    //FILE *fptim;
+    //if ((fptim = fopen("C:\\Users\\nicol\\Documents\\4o ANO ELO\\estagio\\SignalPeakDetector\\samplesIM.txt","r")) == NULL)
+    //{
+     //   printf("Error! opening file");
+   // }
+    //for (i = 0; i < len; i++)
+    //{
+     //   fscanf(fptim, "%f", &xi[i] ); //constroi o vetor com a parte imaginara
+   // }
+    //fclose(fptim);
     for (k = 0; k < N; k++)
     {
         Xr[k] = 0;
