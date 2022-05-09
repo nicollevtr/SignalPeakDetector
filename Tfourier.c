@@ -1,7 +1,6 @@
 // C program for the above approach
 #include <math.h>
 #include <stdio.h>
-
 int main()
 {
     int len;
@@ -40,15 +39,15 @@ int main()
         {
             Xr[k]
                 = (Xr[k]
-                   + xr[n] * cos(2 * 3.141592 * k * n / N)
-                   + xi[n] * sin(2 * 3.141592 * k * n / N));
+                   + xr[n] * cos(2 * 3.14159265359 * k * n / N)
+                   + xi[n] * sin(2 * 3.14159265359 * k * n / N));
             Xi[k]
                 = (Xi[k]
-                   - xr[n] * sin(2 * 3.141592 * k * n / N)
-                   + xi[n] * cos(2 * 3.141592 * k * n / N));
+                   - xr[n] * sin(2 * 3.14159265359 * k * n / N)
+                   + xi[n] * cos(2 * 3.14159265359 * k * n / N));
         }
-       // printf("(%f) + j(%f)\n\n",
-         //      Xr[k], Xi[k]);
+        // printf("(%f) + j(%f)\n\n",
+        //      Xr[k], Xi[k]);
     }
     FILE *fptr;
 
@@ -82,12 +81,7 @@ int main()
     }
     fclose(fptrIM);
     printf("transformada salva!\n");
-
     //calcular os valores absolutos
-
-
-
-
     float Xr2[len];
     float Xi2[len];
     float magX[len];
@@ -96,8 +90,10 @@ int main()
     {
         Xr2[i] = Xr[i]*Xr[i];
         Xi2[i] = Xi[i]*Xi[i];
-        magX[i] = sqrt(Xr2[i]*Xi2[i]);
+        magX[i] = sqrt(Xr2[i]+Xi2[i]);
+       // printf("%f\n", magX[i]);
     }
+
 
     FILE *fptrmag;
 
@@ -115,5 +111,22 @@ int main()
     }
     fclose(fptrmag);
     printf("mag salva!\n");
+
+    int nn = sizeof(magX) / sizeof(magX[0]);
+    float max = magX[0];
+    int index;
+    for (i = 0; i < nn; i++)
+    {
+        //Compare elements of array with max
+        if(magX[i] >= max)
+        {
+            max = magX[i];
+            //  printf("%f",max);
+            index=i;
+            // printf("%f",i);
+        }
+    }
+    printf("Largest element present in given array: %f in %d position", max,index+1);
+    printf("frequencia: %f\n",index*96/10); //nao está centralizado
     return 0;
 }
