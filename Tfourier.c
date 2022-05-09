@@ -118,7 +118,7 @@ int main()
     for (i = 0; i < nn; i++)
     {
         //Compare elements of array with max
-        if(magX[i] >= max)
+        if(magX[i] > max)
         {
             max = magX[i];
             //  printf("%f",max);
@@ -126,7 +126,8 @@ int main()
             // printf("%f",i);
         }
     }
-    printf("Largest element present in given array: %f in %d position", max,index+1);
-    printf("frequencia: %f\n",index*96/10); //nao está centralizado
+    printf("Largest element present in given array: %f in %d position\n", max,index+1);
+    float freq=index*9.6;
+    printf("frequencia: %f\n",freq); //nao está centralizado
     return 0;
 }
