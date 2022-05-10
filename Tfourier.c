@@ -98,11 +98,33 @@ int main()
             max = magX[i]; //encontrar o valor maximo
             //  printf("%f",max);
             index=i;
-            // printf("%f",i);
         }
     }
-    printf("Maximo: %f na posicao %d\n", max,index+1);
+
+    float PowerSpectralDensity[len]; //valores da dep=magx^2/(96000*10000)=magx^2/(Fs*len)
+
+        for (i = 0; i < len; i++)
+    {
+        PowerSpectralDensity[i]=((magX[i])*(magX[i]))/(960000000);
+    }
+    printf("Maximo na posicao %d\n",index+1);
     float freq=index*9.6;
-    printf("Frequencia: %f Hz\n",freq);
+    printf("Frequencia: %f Hz\n\n",freq);
+    int K = sizeof(PowerSpectralDensity) / sizeof(PowerSpectralDensity[0]);
+    float maxx = PowerSpectralDensity[0];
+    int indexx;
+    for (i = 0; i < K; i++)
+    {
+        //Compare elements of array with max
+        if(PowerSpectralDensity[i] > maxx)
+        {
+            maxx = PowerSpectralDensity[i]; //encontrar o valor maximo da densidade espectral de potencia
+            //  printf("%f",max);
+            indexx=i;
+        }
+    }
+    printf("Maximo na posicao %d\n",indexx+1);
+    float freqq=indexx*9.6;
+    printf("Frequencia: %f Hz\n",freqq);
     return 0;
 }
